@@ -1,0 +1,41 @@
+# Cabeçalho do Projeto
+print("=== Análise Do Consumo De Energia Elétrica Para Recomendação Da Quantidade De Placas Solares ===")
+print("Este programa calcula a quantidade de placas solares necessárias para cobrir seus gastos de energia.")
+print()
+
+# Pergunta se o usuário está pronto para começar
+input("Pressione Enter para começar...")
+
+# Função para calcular a média dos gastos diários de energia
+def calcular_media_gastos_diarios():
+    gastos_diários = []  # Lista para armazenar os gastos diários
+    print("Informe os gastos diários de energia (em W/h) para cada dia da semana:")
+    for i in range(7):
+        gasto_dia = float(input(f"Dia {i+1}: "))  # Solicita os gastos diários ao usuário
+        gastos_diários.append(gasto_dia)  # Armazena os gastos diários na lista
+
+    media = sum(gastos_diários) / len(gastos_diários)  # Calcula a média dos gastos diários
+
+    print("\nResumo dos gastos diários da semana:")
+    for i, gasto in enumerate(gastos_diários):
+        print(f"Dia {i+1}: {gasto:.2f} W/h")  # Exibe um resumo dos gastos diários
+
+    return media  # Retorna a média calculada
+
+# Função para calcular o número de placas solares necessárias
+def calcular_placas_solares(media_gastos_diarios):
+    producao_diaria_por_placa = 1800  # Produção média de uma placa solar em Wh por dia (1.8 kWh)
+    folga = 0.15  # 15% de folga
+
+    energia_necessaria = media_gastos_diarios * (1 + folga)  # Calcula a energia necessária com folga
+    placas_solares_necessárias = energia_necessaria / producao_diaria_por_placa  # Calcula o número de placas necessárias
+
+    print("\nResultado:")
+    print(f"A média de gastos diários de energia é de {media_gastos_diarios:.2f} W/h.")  # Exibe a média de gastos
+    print("Número de placas solares necessárias:")
+    print(f"Você precisaria de aproximadamente {round(placas_solares_necessárias)} placas solares para alcançar a energia necessária com uma folga de 15%.")  # Exibe o número de placas necessárias
+
+# Início do programa
+print()
+media_gastos_diarios = calcular_media_gastos_diarios()
+calcular_placas_solares(media_gastos_diarios)
